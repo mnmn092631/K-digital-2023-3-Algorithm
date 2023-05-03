@@ -35,7 +35,15 @@ class PhyscData implements Comparable<PhyscData> {
 
 	@Override
 	public int compareTo(PhyscData o) {
-		return this.name.compareTo(o.name);
+		if (this.name.compareTo(o.name) == 0) {
+			if (this.height == o.height) {
+				return (int) (this.vision - o.vision);
+			} else {
+				return this.height - o.height;
+			}
+		} else {
+			return this.name.compareTo(o.name);
+		}
 	}
 
 }
