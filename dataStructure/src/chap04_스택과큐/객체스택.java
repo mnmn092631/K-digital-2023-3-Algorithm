@@ -129,8 +129,8 @@ public class 객체스택 {
 			switch (menu) {
 			case 1: // 푸시
 				System.out.print("데이터: ");
-				rndx = random.nextInt() % 20;
-				rndy = random.nextInt() % 20;
+				rndx = random.nextInt(20);
+				rndy = random.nextInt(20);
 				p = new Point(rndx, rndy);
 				try {
 					s.push(p);
