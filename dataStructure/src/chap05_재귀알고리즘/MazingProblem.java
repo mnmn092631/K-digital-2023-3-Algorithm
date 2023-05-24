@@ -52,11 +52,19 @@ public class MazingProblem {
 				int g = i + moves[d].a;
 				int h = j + moves[d].b;
 				if ((g == ix) && (h == iy)) { // reached exit
+					st.push(new Items(i, j, d + 1));
 					mark[g][h] = 2;
+					while(!st.isEmpty()) {
+						Items result = st.pop();
+						int rX = result.x;
+						int rY = result.y;
+						mark[rX][rY] = 2;
+					}
 					System.out.println("exit");
+					return;
 				}
 				if ((maze[g][h] == 0) && (mark[g][h] == 0)) { // new position
-					mark[g][h] = 2;
+					mark[g][h] = 1;
 					st.push(new Items(i, j, d + 1));
 					i = g;
 					j = h;
