@@ -21,24 +21,19 @@ class LinkedList1 {
 	}
 
 	// element 삭제
-	public void Delete(int element) {
+	public String Delete(int element) {
 		Node1 ptr = first;
-		if (first == null) {
-			System.out.println("List가 비어있어 삭제할 수 없습니다.");
-			return;
-		}
+		if (first == null) return "List가 비어있어 삭제할 수 없습니다.";
+		if (!Search(element)) return "리스트에 " + element + "가 없습니다.";
+		
 		if (element == first.data) first = first.link;
 		else {
 			while (ptr.link.data != element) {
 				ptr = ptr.link;
-				if (ptr.link == null) {
-					System.out.println("리스트에 " + element + "가 없습니다.");
-					return;
-				}
 			}
 			ptr.link = ptr.link.link;
 		}
-		System.out.println(element + "가 삭제되었습니다.");
+		return element + "가 삭제되었습니다.";
 	}
 
 	// 모든 노드 출력
@@ -147,7 +142,8 @@ public class 정수연결리스트 {
 				break;
 			case Delete: // 선택 노드를 삭제
 				data = sc.nextInt();
-				l.Delete(data);
+				String delResult = l.Delete(data);
+				System.out.println(delResult);
 				break;
 			case Show: // 모든 노드 출력
 				l.Show();
