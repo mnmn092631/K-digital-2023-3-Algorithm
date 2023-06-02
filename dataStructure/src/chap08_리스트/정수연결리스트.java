@@ -31,7 +31,7 @@ class LinkedList1 {
 		else {
 			while (ptr.link.data != element) {
 				ptr = ptr.link;
-				if (ptr == null || ptr.link == null) {
+				if (ptr.link == null) {
 					System.out.println("리스트에 " + element + "가 없습니다.");
 					return;
 				}
