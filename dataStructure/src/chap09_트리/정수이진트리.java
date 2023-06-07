@@ -3,7 +3,7 @@ package chap09_트리;
 import java.util.Random;
 import java.util.Scanner;
 
-//정수를 저정하는 이진트리 만들기 실습
+//정수를 저장하는 이진트리 만들기 실습
 class TreeNode {
 	TreeNode LeftChild;
 	int data;
@@ -28,6 +28,8 @@ class Tree {
 				temp = temp.LeftChild;
 			}
 		}
+		else if(current.LeftChild == null) return current;
+		else inorderSucc(current.LeftChild);
 		return temp;
 	}
 
@@ -118,26 +120,16 @@ class Tree {
 			}
 		}
 
-		if (p.LeftChild == null) {
-			if (p == root) root = p.RightChild;
-			else if (isLeftChild) parent.LeftChild = p.RightChild;
-			else parent.RightChild = p.RightChild;
-		} else if (p.RightChild == null) {
-			if (p == root) root = p.LeftChild;
-			else if (isLeftChild) parent.LeftChild = p.LeftChild;
-			else parent.RightChild = p.LeftChild;
-		} else {
-			parent = p;
-			TreeNode left = p.LeftChild;
-			isLeftChild = true;
-			while (left.RightChild != null) {
-				parent = left;
-				left = left.RightChild;
-				isLeftChild = false;
-			}
-			p.data = left.data;
-			if (isLeftChild) parent.LeftChild = left.LeftChild;
-			else parent.RightChild = left.LeftChild;
+		if (isLeafNode(p)) {
+			if (p == root) root = null;
+			else if (isLeftChild) parent.LeftChild = null;
+			else parent.RightChild = null;
+		}
+		else {
+			TreeNode successor = inorderSucc(p);
+			int data = successor.data;
+			delete(successor.data);
+			p.data = data;
 		}
 		return true;
 	}
@@ -211,6 +203,7 @@ public class 정수이진트리 {
 				for (int i = 0; i < count; i++) {
 					if (t.insert(input[i]) == false)
 						System.out.println("Insert Duplicated data");
+					else System.out.println(input[i]);
 				}
 				break;
 
