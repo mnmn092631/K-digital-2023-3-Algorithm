@@ -197,7 +197,6 @@ class DoubledLinkedList2 {
 		}
 		
 		return mergedList;
-
 	}
 }
 
@@ -208,9 +207,9 @@ public class 객체이중리스트 {
 		private final String message; // 표시할 문자열
 
 		static Menu MenuAt(int idx) { // 순서가 idx번째인 열거를 반환
-			for (Menu m : Menu.values())
-				if (m.ordinal() == idx)
-					return m;
+			for (Menu m : Menu.values()) {
+				if (m.ordinal() == idx) return m;
+			}
 			return null;
 		}
 
@@ -230,8 +229,7 @@ public class 객체이중리스트 {
 		do {
 			for (Menu m : Menu.values()) {
 				System.out.printf("(%d) %s  ", m.ordinal(), m.getMessage());
-				if ((m.ordinal() % 3) == 2 && m.ordinal() != Menu.Exit.ordinal())
-					System.out.println();
+				if ((m.ordinal() % 3) == 2 && m.ordinal() != Menu.Exit.ordinal()) System.out.println();
 			}
 			System.out.print(" : ");
 			key = sc1.nextInt();
@@ -244,7 +242,6 @@ public class 객체이중리스트 {
 		Scanner sc2 = new Scanner(System.in);
 		System.out.println("Linked List");
 		DoubledLinkedList2 lst1 = new DoubledLinkedList2(), lst2 = new DoubledLinkedList2(),lst3 = new DoubledLinkedList2();
-		String sno1 = null, sname1 = null;
 		SimpleObject2 so;
 		boolean result = false;
 		do {
