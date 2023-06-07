@@ -203,7 +203,6 @@ public class 정수이진트리 {
 				for (int i = 0; i < count; i++) {
 					if (t.insert(input[i]) == false)
 						System.out.println("Insert Duplicated data");
-					else System.out.println(input[i]);
 				}
 				break;
 
