@@ -174,14 +174,12 @@ class Tree4 {
 
 	public boolean delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
 		TreeNode4 p = root;
-		TreeNode4 parent = null;
 		boolean isLeftChild = true;
 
 		while (true) {
 			if (p == null) return false;
 			if (c.compare(obj, p.data) == 0) break;
 			else {
-				parent = p;
 				if (c.compare(obj, p.data) < 0) {
 					isLeftChild = true;
 					p = p.LeftChild;
@@ -192,6 +190,8 @@ class Tree4 {
 			}
 		}
 
+		TreeNode4 parent = findParent(p, c);
+		
 		if (p.LeftChild == null) {
 			if (p == root) root = p.RightChild;
 			else if (isLeftChild) parent.LeftChild = p.RightChild;
