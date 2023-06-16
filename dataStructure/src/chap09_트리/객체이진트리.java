@@ -88,14 +88,15 @@ class Tree4 {
 			while (temp.LeftChild != null) {
 				temp = temp.LeftChild;
 			}
-		}
+		} else if (current.LeftChild == null) return current;
+		else inorderSucc(current.LeftChild);
 		return temp;
 	}
 
 	TreeNode4 findParent(TreeNode4 current, Comparator<? super SimpleObject2> c) {
 		TreeNode4 p = root, temp = null;
 		while (p != null) {
-			if (c.compare(p.data, current.data) == 0)  return temp;
+			if (c.compare(p.data, current.data) == 0) return temp;
 			else if (c.compare(p.data, current.data) < 0) {
 				temp = p;
 				p = p.RightChild;
@@ -191,27 +192,16 @@ class Tree4 {
 		}
 
 		TreeNode4 parent = findParent(p, c);
-		
-		if (p.LeftChild == null) {
-			if (p == root) root = p.RightChild;
-			else if (isLeftChild) parent.LeftChild = p.RightChild;
-			else parent.RightChild = p.RightChild;
-		} else if (p.RightChild == null) {
-			if (p == root) root = p.LeftChild;
-			else if (isLeftChild) parent.LeftChild = p.LeftChild;
-			else parent.RightChild = p.LeftChild;
+
+		if (isLeafNode(p)) {
+			if (p == root) root = null;
+			else if (isLeftChild) parent.LeftChild = null;
+			else parent.RightChild = null;
 		} else {
-			parent = p;
-			TreeNode4 left = p.LeftChild;
-			isLeftChild = true;
-			while (left.RightChild != null) {
-				parent = left;
-				left = left.RightChild;
-				isLeftChild = false;
-			}
-			p.data = left.data;
-			if (isLeftChild) parent.LeftChild = left.LeftChild;
-			else parent.RightChild = left.LeftChild;
+			TreeNode4 successor = inorderSucc(p);
+			SimpleObject2 data = successor.data;
+			delete(successor.data, c);
+			p.data = data;
 		}
 		return true;
 	}
@@ -236,9 +226,9 @@ public class 객체이진트리 {
 		private final String message; // 표시할 문자열
 
 		static Menu MenuAt(int idx) { // 순서가 idx번째인 열거를 반환
-			for (Menu m : Menu.values())
-				if (m.ordinal() == idx)
-					return m;
+			for (Menu m : Menu.values()) {
+				if (m.ordinal() == idx) return m;
+			}
 			return null;
 		}
 
@@ -281,13 +271,13 @@ public class 객체이진트리 {
 					t.add(soz, SimpleObject2.NO_ORDER);
 				}
 				break;
-				
+
 			case Delete: // 삭제
 				so = new SimpleObject2();
 				so.scanData("삭제", SimpleObject2.NO);
 				t.delete(so, SimpleObject2.NO_ORDER);
 				break;
-				
+
 			case Search: // 검색
 				so = new SimpleObject2();
 				so.scanData("검색", SimpleObject2.NO);
@@ -300,7 +290,7 @@ public class 객체이진트리 {
 				t.inorder();
 				System.out.println();
 				break;
-				
+
 			case Exit:
 				break;
 			}
